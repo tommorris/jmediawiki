@@ -23,18 +23,10 @@ import nu.xom.ParsingException;
  * @author tom
  */
 public class Wiki {
-	@Getter
-	@Setter
-	private String rootUrl;
-	@Getter
-	@Setter
-	private String name;
-	@Getter
-	@Setter
-	private String apiEndpoint;
-	@Getter
-	@Setter
-	private String lang;
+	@Getter @Setter private String rootUrl;
+	@Getter @Setter private String name;
+	@Getter @Setter private String apiEndpoint;
+	@Getter @Setter private String lang;
 
 	public String getVersion() throws ParsingException, IOException {
 		Document doc = this.loadUrl(this.getApiEndpoint()

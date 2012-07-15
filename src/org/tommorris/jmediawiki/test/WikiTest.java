@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import junit.framework.Assert;
-
 import nu.xom.ParsingException;
 
 import org.junit.Test;
