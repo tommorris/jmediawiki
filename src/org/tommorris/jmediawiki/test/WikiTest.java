@@ -2,6 +2,12 @@ package org.tommorris.jmediawiki.test;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
+import junit.framework.Assert;
+
+import nu.xom.ParsingException;
+
 import org.junit.Test;
 import org.tommorris.jmediawiki.Wiki;
 
@@ -22,4 +28,20 @@ public class WikiTest {
 		assertEquals(null, commons.getLang());
 	}
 
+	@Test
+	public void testVersion() {
+		try {
+			Wiki local = new Wiki();
+			local.setName("localhost");
+			local.setRootUrl("http://localhost:4881/");
+			local.setApiEndpoint("http://localhost:4881/api.php");
+			assertNotNull(local.getVersion());
+		} catch (ParsingException e) {
+			e.printStackTrace();
+			fail("threw ParsingException");
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail("threw IOException");
+		}
+	}
 }
