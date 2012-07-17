@@ -38,6 +38,7 @@ public class WikiTest {
 			assertNotNull(local.getVersion());
 			assertNotNull(local.getGitHash());
 			assertNotNull(local.getPhpVersion());
+			assertNotNull(local.getPhpSapi());
 		} catch (ParsingException e) {
 			e.printStackTrace();
 			fail("threw ParsingException");

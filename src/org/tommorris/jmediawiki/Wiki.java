@@ -37,6 +37,7 @@ public class Wiki {
 	private String version;
 	private String gitHash;
 	private String phpVersion;
+	private String phpSapi;
 	private ArrayList<Namespace> namespaces;
 	
 	private boolean loadedSiteInfo = false;
@@ -51,6 +52,7 @@ public class Wiki {
 			this.version = generalElement.getAttributeValue("generator");
 			this.gitHash = generalElement.getAttributeValue("git-hash");
 			this.phpVersion = generalElement.getAttributeValue("phpversion");
+			this.phpSapi = generalElement.getAttributeValue("phpsapi");
 			// This overrides the site name with a more accurate description.
 			this.setName(generalElement.getAttributeValue("sitename"));
 			
@@ -83,6 +85,11 @@ public class Wiki {
 	public String getPhpVersion() throws ParsingException, IOException {
 		this.loadSiteInfo();
 		return this.phpVersion;
+	}
+	
+	public String getPhpSapi() throws ParsingException, IOException {
+		this.loadSiteInfo();
+		return this.phpSapi;
 	}
 	
 	public ArrayList<Namespace> getNamespaces() throws ParsingException, IOException {
