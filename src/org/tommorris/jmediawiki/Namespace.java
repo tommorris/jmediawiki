@@ -12,6 +12,11 @@ public class Namespace {
 		Namespace ns = new Namespace();
 		assert(xml.getQualifiedName() == "ns");
 		ns.setId(Integer.parseInt(xml.getAttributeValue("id")));
+		if (xml.getValue() == null || xml.getValue() == "") {
+			ns.setName("");
+		} else {
+			ns.setName(xml.getValue());
+		}
 		return ns;
 	}
 }

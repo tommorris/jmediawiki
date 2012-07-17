@@ -22,6 +22,7 @@ public class NamespaceTest {
 		Namespace ns0 = Namespace.parseFromXml(el0);
 		assertNotNull(ns0);
 		assertEquals(new Integer(0), ns0.getId());
+		assertEquals("", ns0.getName());
 	}
 	
 	public static Element processXml(String input) throws ValidityException, ParsingException {
