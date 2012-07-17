@@ -37,6 +37,7 @@ public class WikiTest {
 			local.setApiEndpoint("http://localhost:4881/api.php");
 			assertNotNull(local.getVersion());
 			assertNotNull(local.getGitHash());
+			assertNotNull(local.getPhpVersion());
 		} catch (ParsingException e) {
 			e.printStackTrace();
 			fail("threw ParsingException");
