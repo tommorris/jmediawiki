@@ -42,4 +42,22 @@ public class WikiTest {
 			fail("threw IOException");
 		}
 	}
+	
+	@Test
+	public void testSiteNameChange() {
+		try {
+			Wiki local = new Wiki();
+			local.setName("localhost");
+			local.setRootUrl("http://localhost:4881");
+			local.setApiEndpoint("http://localhost:4881/api.php");
+			local.getVersion();
+			assertNotSame("localhost", local.getName());
+		} catch (ParsingException e) {
+			e.printStackTrace();
+			fail("threw ParsingException");
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail("threw IOException");
+		}
+	}
 }

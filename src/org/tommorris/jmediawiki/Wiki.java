@@ -27,15 +27,37 @@ public class Wiki {
 	@Getter @Setter private String name;
 	@Getter @Setter private String apiEndpoint;
 	@Getter @Setter private String lang;
-
-	public String getVersion() throws ParsingException, IOException {
-		Document doc = this.loadUrl(this.getApiEndpoint()
+	@Getter private String articlePath;
+	private String mainPage;
+	private String version;
+	
+	private boolean loadedSiteInfo = false;
+	
+	private void loadSiteInfo() throws ParsingException, IOException {
+		if (loadedSiteInfo == false) {
+			Document doc = this.loadUrl(this.getApiEndpoint()
 				+ "?action=query&meta=siteinfo&siprop=general&format=xml");
-		Nodes nodes = doc.getDocument().query("/api/query/general");
-		String s = ((Element) nodes.get(0)).getAttributeValue("generator");
-		return s;
+			Nodes nodes = doc.getDocument().query("/api/query/general");
+			Element generalElement = (Element) nodes.get(0);
+			this.mainPage = generalElement.getAttributeValue("mainpage");
+			this.version = generalElement.getAttributeValue("generator");
+			// This overrides the site name with a more accurate description.
+			this.setName(generalElement.getAttributeValue("sitename"));
+		}
 	}
 
+	public String getVersion() throws ParsingException, IOException {
+		this.loadSiteInfo();
+		return this.version;
+	}
+	
+	public String getMainPage() throws ParsingException, IOException {
+		this.loadSiteInfo();
+		return this.mainPage;
+	}
+
+	/* Convenience methods */
+	
 	private Document loadUrl(String url) throws ParsingException, IOException {
 		HttpClient client = new DefaultHttpClient();
 		HttpGet get = new HttpGet(url);
