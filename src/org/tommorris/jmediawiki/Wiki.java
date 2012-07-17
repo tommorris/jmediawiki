@@ -35,6 +35,7 @@ public class Wiki {
 	@Getter private String articlePath;
 	private String mainPage;
 	private String version;
+	private String gitHash;
 	private ArrayList<Namespace> namespaces;
 	
 	private boolean loadedSiteInfo = false;
@@ -47,6 +48,7 @@ public class Wiki {
 			Element generalElement = (Element) nodes.get(0);
 			this.mainPage = generalElement.getAttributeValue("mainpage");
 			this.version = generalElement.getAttributeValue("generator");
+			this.gitHash = generalElement.getAttributeValue("git-hash");
 			// This overrides the site name with a more accurate description.
 			this.setName(generalElement.getAttributeValue("sitename"));
 			
@@ -68,6 +70,11 @@ public class Wiki {
 	public String getMainPage() throws ParsingException, IOException {
 		this.loadSiteInfo();
 		return this.mainPage;
+	}
+	
+	public String getGitHash() throws ParsingException, IOException {
+		this.loadSiteInfo();
+		return this.gitHash;
 	}
 	
 	public ArrayList<Namespace> getNamespaces() throws ParsingException, IOException {

@@ -29,13 +29,14 @@ public class WikiTest {
 	}
 
 	@Test
-	public void testVersion() {
+	public void testMetadata() {
 		try {
 			Wiki local = new Wiki();
 			local.setName("localhost");
 			local.setRootUrl("http://localhost:4881/");
 			local.setApiEndpoint("http://localhost:4881/api.php");
 			assertNotNull(local.getVersion());
+			assertNotNull(local.getGitHash());
 		} catch (ParsingException e) {
 			e.printStackTrace();
 			fail("threw ParsingException");
