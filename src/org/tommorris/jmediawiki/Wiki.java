@@ -20,6 +20,10 @@ import nu.xom.ParsingException;
 /**
  * Root class that represents a MediaWiki wiki and endpoint.
  * 
+ * Instantiate the class with a URL to a MediaWiki installation,
+ * or use the convenience methods - e.g. <code>Wiki.wikipedia("en")</code>
+ * to retrieve a Wikimedia Foundation project.
+ * 
  * @author tom
  */
 public class Wiki {
