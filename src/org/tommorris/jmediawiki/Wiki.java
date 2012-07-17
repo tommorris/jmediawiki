@@ -1,6 +1,7 @@
 package org.tommorris.jmediawiki;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -34,6 +35,7 @@ public class Wiki {
 	@Getter private String articlePath;
 	private String mainPage;
 	private String version;
+	private ArrayList<Namespace> namespaces;
 	
 	private boolean loadedSiteInfo = false;
 	
@@ -47,6 +49,14 @@ public class Wiki {
 			this.version = generalElement.getAttributeValue("generator");
 			// This overrides the site name with a more accurate description.
 			this.setName(generalElement.getAttributeValue("sitename"));
+			
+			Nodes namespaces = doc.getDocument().query("/api/query/namespaces/ns");
+			ArrayList<Namespace> nsList = new ArrayList<Namespace>();
+			for (int i = 0; i < namespaces.size(); i++) {
+				Namespace ns = Namespace.parseFromXml((Element) namespaces.get(i));
+				nsList.add(ns);
+			}
+			this.namespaces = nsList;
 		}
 	}
 
@@ -58,6 +68,11 @@ public class Wiki {
 	public String getMainPage() throws ParsingException, IOException {
 		this.loadSiteInfo();
 		return this.mainPage;
+	}
+	
+	public ArrayList<Namespace> getNamespaces() throws ParsingException, IOException {
+		this.loadSiteInfo();
+		return this.namespaces;
 	}
 
 	/* Convenience methods */
